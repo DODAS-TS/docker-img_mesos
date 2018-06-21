@@ -1,2 +1,3 @@
-# docker-img_mesos
-Base docker image with mesos
+# Mesos docker image
+
+Base docker image with mesos.
