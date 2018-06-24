@@ -2,13 +2,12 @@ FROM ubuntu:16.04
 
 ENV MESOS_VERSION_TAG="1.6.0"
 
-WORKDIR /tmp
-
 RUN apt-get update \
     && apt-get upgrade -y --no-install-recommends \
     && apt-get install -y --no-install-recommends autoconf \ 
         automake \
         build-essential \ 
+        cmake \
         git \ 
         iputils-ping \ 
         libapr1-dev \ 
@@ -26,19 +25,37 @@ RUN apt-get update \
         wget \ 
         zlib1g-dev \ 
     && apt-get autoremove \
-    && apt-get clean \
-    && git clone https://git-wip-us.apache.org/repos/asf/mesos.git
+    && apt-get clean
 
+WORKDIR /tmp
+
+##
+# Upgrade CMAKE
+RUN wget https://cmake.org/files/v3.12/cmake-3.12.0-rc1.tar.gz -O cmake.tar.gz \
+    && mkdir cmake \
+    && tar xf cmake.tar.gz -C cmake --strip-components 1
+
+WORKDIR /tmp/cmake
+RUN cmake . \
+    && make \
+    && make install
+
+##
+# Get and compile mesos
+WORKDIR /tmp
+RUN git clone "https://git-wip-us.apache.org/repos/asf/mesos.git"
 WORKDIR /tmp/mesos
 
 # Select version
-RUN git checkout -b "$MESOS_VERSION_TAG"
+RUN git checkout "$MESOS_VERSION_TAG"
 
 # Bootstrap (Only required if building from git repository).
 RUN ./bootstrap
 
-# Configure and build.
-RUN mkdir build \
-    && cd build \
-    && ../configure \
+RUN cmake . -DCPACK_BINARY_DEB=ON \
     && make
+
+# RUN mkdir build \
+#     && cd build \
+#     && ../configure \
+#     && make
