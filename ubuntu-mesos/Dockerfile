@@ -1,4 +1,6 @@
-FROM ubuntu:16.04
+##
+# Builder Stage
+FROM ubuntu:16.04 as builder
 
 ENV MESOS_VERSION_TAG="1.6.0"
 
@@ -52,10 +54,16 @@ RUN git checkout "$MESOS_VERSION_TAG"
 # Bootstrap (Only required if building from git repository).
 RUN ./bootstrap
 
-RUN cmake . -DCPACK_BINARY_DEB=ON \
-    && make
+RUN cmake . -DCPACK_BINARY_DEB=ON -DCPACK_PACKAGE_CONTACT="mirco.tracolli@pg.infn.it" \
+    && make package \
+    && mv "/tmp/mesos-$MESOS_VERSION_TAG.deb" /tmp/mesos.deb
 
-# RUN mkdir build \
-#     && cd build \
-#     && ../configure \
-#     && make
+##
+# Final stage
+FROM ubuntu:16.04
+
+COPY --from=builder /tmp/mesos.deb /tmp
+RUN apt-get update \
+    && apt-get upgrade -y --no-install-recommends \
+    && dpkg -i /tmp/mesos.deb \
+    && rm /tmp/mesos.deb
