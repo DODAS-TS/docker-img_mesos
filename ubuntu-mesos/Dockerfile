@@ -55,8 +55,8 @@ RUN git checkout "$MESOS_VERSION_TAG"
 RUN ./bootstrap
 
 RUN cmake . -DCPACK_BINARY_DEB=ON -DCPACK_PACKAGE_CONTACT="mirco.tracolli@pg.infn.it" \
-    && make package \
-    && mv "/tmp/mesos/mesos-$MESOS_VERSION_TAG.deb" /tmp/mesos/mesos.deb
+    && make package
+RUN mv "/tmp/mesos/mesos-$MESOS_VERSION_TAG.deb" /tmp/mesos/mesos.deb
 
 ##
 # Final stage
