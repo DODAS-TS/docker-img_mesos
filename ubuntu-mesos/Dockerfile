@@ -56,7 +56,7 @@ RUN ./bootstrap
 
 RUN cmake . -DCPACK_BINARY_DEB=ON -DCPACK_PACKAGE_CONTACT="mirco.tracolli@pg.infn.it" \
     && make package
-RUN mv "/tmp/mesos/mesos-$MESOS_VERSION_TAG.deb" /tmp/mesos/mesos.deb
+RUN mv "mesos-$MESOS_VERSION_TAG.deb" mesos.deb
 
 ##
 # Final stage
