@@ -56,13 +56,13 @@ RUN ./bootstrap
 
 RUN cmake . -DCPACK_BINARY_DEB=ON -DCPACK_PACKAGE_CONTACT="mirco.tracolli@pg.infn.it" \
     && make package \
-    && mv "/tmp/mesos-$MESOS_VERSION_TAG.deb" /tmp/mesos.deb
+    && mv "/tmp/mesos/mesos-$MESOS_VERSION_TAG.deb" /tmp/mesos/mesos.deb
 
 ##
 # Final stage
 FROM ubuntu:16.04
 
-COPY --from=builder /tmp/mesos.deb /tmp
+COPY --from=builder /tmp/mesos/mesos.deb /tmp
 RUN apt-get update \
     && apt-get upgrade -y --no-install-recommends \
     && dpkg -i /tmp/mesos.deb \
