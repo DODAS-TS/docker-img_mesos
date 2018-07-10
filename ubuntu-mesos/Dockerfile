@@ -33,7 +33,7 @@ WORKDIR /tmp
 
 ##
 # Upgrade CMAKE
-RUN wget https://cmake.org/files/v3.12/cmake-3.12.0-rc1.tar.gz -O cmake.tar.gz \
+RUN wget https://cmake.org/files/LatestRelease/cmake-3.11.0.tar.gz -O cmake.tar.gz \
     && mkdir cmake \
     && tar xf cmake.tar.gz -C cmake --strip-components 1
 
