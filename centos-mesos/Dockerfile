@@ -10,6 +10,8 @@ RUN yum --setopt=tsflags=nodocs -y update \
         git \
         tar \ 
         wget \
+    && wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo \
+    && yum --setopt=tsflags=nodocs -y update \
     && yum groupinstall --setopt=tsflags=nodocs -y "Development Tools" \
     && yum --setopt=tsflags=nodocs -y install apache-maven \
         apr-devel \
