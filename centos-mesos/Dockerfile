@@ -55,7 +55,7 @@ RUN ./bootstrap
 
 RUN cmake . -DCPACK_BINARY_RPM=ON -DCPACK_PACKAGE_CONTACT="mirco.tracolli@pg.infn.it" \
     && make package
-RUN mv "mesos-$MESOS_VERSION_TAG.deb" mesos.rpm
+RUN mv "mesos-$MESOS_VERSION_TAG.rpm" mesos.rpm
 
 ##
 # Final stage
