@@ -4,8 +4,8 @@ FROM centos:7 as builder
 
 ENV MESOS_VERSION_TAG="1.6.0"
 
-RUN apt-get update \
-    && yum --setopt=tsflags=nodocs -y update \
+RUN yum --setopt=tsflags=nodocs -y update \
+    && yum --setopt=tsflags=nodocs -y upgrade \
     && yum --setopt=tsflags=nodocs -y install epel-release \
         git \
         tar \ 
@@ -61,7 +61,7 @@ RUN mv "mesos-$MESOS_VERSION_TAG.deb" mesos.rpm
 FROM centos:7
 
 COPY --from=builder /tmp/mesos/mesos.rpm /tmp
-RUN apt-get update \
-    && apt-get upgrade -y --no-install-recommends \
-    && dpkg -i /tmp/mesos.rpm \
+RUN yum --setopt=tsflags=nodocs -y update \
+    && yum --setopt=tsflags=nodocs -y upgrade \
+    && rpm -i /tmp/mesos.rpm \
     && rm /tmp/mesos.rpm
