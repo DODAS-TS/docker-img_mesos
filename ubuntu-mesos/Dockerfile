@@ -53,7 +53,7 @@ RUN git checkout "$MESOS_VERSION_TAG"
 # Bootstrap (Only required if building from git repository).
 RUN ./bootstrap
 
-RUN cmake . -DCPACK_BINARY_RPM=ON -DCPACK_PACKAGE_CONTACT="mirco.tracolli@pg.infn.it" \
+RUN cmake . -DCPACK_BINARY_DEB=ON -DCPACK_PACKAGE_CONTACT="mirco.tracolli@pg.infn.it" \
     && make package
 RUN mv "mesos-$MESOS_VERSION_TAG.deb" mesos.deb
 
