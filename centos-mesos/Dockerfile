@@ -12,7 +12,7 @@ RUN yum --setopt=tsflags=nodocs -y update \
         wget \
     && wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo \
     && yum --setopt=tsflags=nodocs -y update \
-    && yum groupinstall --setopt=tsflags=nodocs -y "Development Tools" \
+    && yum groupinstall --setopt=tsflags=nodocs -y 'Development Tools' \
     && yum --setopt=tsflags=nodocs -y install apache-maven \
         apr-devel \
         apr-util-devel \
@@ -38,7 +38,7 @@ RUN wget https://cmake.org/files/LatestRelease/cmake-3.11.0.tar.gz -O cmake.tar.
     && tar xf cmake.tar.gz -C cmake --strip-components 1
 
 WORKDIR /tmp/cmake
-RUN cmake . \
+RUN ./bootstrap \
     && make \
     && make install
 

@@ -38,7 +38,7 @@ RUN wget https://cmake.org/files/LatestRelease/cmake-3.11.0.tar.gz -O cmake.tar.
     && tar xf cmake.tar.gz -C cmake --strip-components 1
 
 WORKDIR /tmp/cmake
-RUN cmake . \
+RUN ./bootstrap \
     && make \
     && make install
 
