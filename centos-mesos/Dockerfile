@@ -16,7 +16,6 @@ RUN yum --setopt=tsflags=nodocs -y update \
     && yum --setopt=tsflags=nodocs -y install apache-maven \
         apr-devel \
         apr-util-devel \
-        cmake \
         cyrus-sasl-devel \
         cyrus-sasl-md5 \
         java-1.8.0-openjdk-devel \

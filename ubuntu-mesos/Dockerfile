@@ -9,7 +9,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends autoconf \ 
         automake \
         build-essential \ 
-        cmake \
         git \ 
         iputils-ping \ 
         libapr1-dev \ 
