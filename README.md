@@ -22,7 +22,7 @@ Follow these commands:
 docker login
 # Set a tag to the builded image
 docker tag builded_image_id repository/name:tag
-# E.G.
+# e.g.
 docker tag builded_image_id dodasts/mesos:ubuntu
 # Push the image
 docker push dodasts/mesos:ubuntu
