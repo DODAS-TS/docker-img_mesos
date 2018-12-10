@@ -23,7 +23,7 @@ docker login
 # Set a tag to the builded image
 docker tag builded_image_id repository/name:tag
 # e.g.
-docker tag builded_image_id dodasts/mesos:ubuntu
+docker tag builded_image_id dodasts/mesos-base:ubuntu
 # Push the image
-docker push dodasts/mesos:ubuntu
+docker push dodasts/mesos-base:ubuntu
 ```
